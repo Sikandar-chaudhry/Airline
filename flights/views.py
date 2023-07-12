@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from .models import Flight
+from .models import Flight,Passenger
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 # Create your views here.
 
 
@@ -15,5 +17,14 @@ def flight(request , flight_id):
     # pk instead of id , stands for primary key
     flight = Flight.objects.get(id=flight_id)
     return render(request, "flights/flight.html", {
-        "flight" : flight
+        "flight" : flight,
+        "passengers" : flight.passengers.all()
     })
+    
+def book (request , flight_id):
+    if request.method == "POST":
+        flight = Flight.objects.get(pk=flight_id)
+        passenger = Passenger.objects.get(pk=int(request.POST["passenger"]))
+        passenger.flights.add(flight)
+        
+        return HttpResponseRedirect(reverse("flight:flight" ,args = (flight.id,)))
