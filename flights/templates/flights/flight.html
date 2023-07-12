@@ -2,6 +2,11 @@
 
 {% block body %}
 
-    <h1>{{flight}}</h1>
-
+    <h1>Flight {{flight.id}}</h1>
+    <ul>
+        <li>Origin : {{ flight.origin }}</li>
+        <li>Destination : {{ flight.destination }}</li>
+        <li>Duration : {{ flight.duration }}</li>
+    </ul>
+    <a href="{% url 'flight:index'%}"><button>All Flights</button></a>
 {% endblock %}
