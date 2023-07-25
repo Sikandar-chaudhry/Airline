@@ -1,6 +1,6 @@
 # Airline
 
-##Features
+#Features
 - Look into all available flights.
 - Check each individual flight's data.
 - Check passengers into on that particular flight.
