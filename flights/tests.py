@@ -56,7 +56,7 @@ class FlightTestCase(TestCase):
         f = Flight.objects.get(origin=a1, destination=a1)
 
         c = Client()
-        response = c.get(f"/flights/{f.id}")
+        response = c.get(f"flights/{f.id}")
         self.assertEqual(response.status_code, 200)
 
     def test_invalid_flight_page(self):
@@ -72,7 +72,7 @@ class FlightTestCase(TestCase):
         f.passengers.add(p)
 
         c = Client()
-        response = c.get(f"/flights/{f.id}")
+        response = c.get(f"flights/{f.id}")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["passengers"].count(), 1)
 
@@ -81,6 +81,6 @@ class FlightTestCase(TestCase):
         p = Passenger.objects.create(first="Alice", last="Adams")
 
         c = Client()
-        response = c.get(f"/flights/{f.id}")
+        response = c.get(f"flights/{f.id}")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["non_passengers"].count(), 1)
